@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get "todos", to: "todos#index"
 end
+
+
+
+#routes.rb is the place where we define every URL that our application is supposed to handle.
