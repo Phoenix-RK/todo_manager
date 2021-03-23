@@ -1,7 +1,5 @@
 class TodosController < ApplicationController
 
-  skip_before_action :verify_authenticity_token
-
   def to_pleasant_string
     is_completed = completed ? "[X]" : "[ ]"
     "#{id}. #{todo_text}. #{due_date.to_s(:long)}. #{is_completed}"
