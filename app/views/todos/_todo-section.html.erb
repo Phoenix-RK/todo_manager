@@ -9,19 +9,25 @@
      <% if !todo.completed || section_title != "Overdue" %>
         <li class="TodoItem"  >
           <label class="TodoItem-container" style="margin-left:32px; display:flex;">
-          <% if todo.completed %>
-            <input class="TodoItem-checkbox" type="checkbox" checked />
-            <p style="text-decoration: line-through;"><%=todo.todo_text%></p>
+
+            <%= form_with(url: "/todos/#{todo.id}" , method:"put") do %>
+              <input
+                  class="TodoItem-checkbox"
+                  name="completed"
+                  type="checkbox" <%=todo.completed ? "checked" : ""%>
+                  onclick="this.form.submit()"
+               />
+            <%end%>
+
+            <p style= '<%= todo.completed ? "text-decoration: line-through;" : "" %>' ><%=todo.todo_text%></p>
             <% if show_date%>
               <p class="TodoItem-duedate"><%=todo.due_date%></p>
             <%end%>
-          <%else%>
-            <input class="TodoItem-checkbox" type="checkbox"/>
-            <%=todo.todo_text%>
-            <% if show_date%>
-              <p class="TodoItem-duedate"><%=todo.due_date%></p>
-            <%end%>
-          <%end%>
+            <a href="javascript:void(0)" class="TodoItem-delete">
+                <%= form_with(url: "/todos/#{todo.id}" , method:"delete") do %>
+                    <input type='image' src="trash-can.svg" "/>
+                <%end%>
+            </a>
           </label>
         </li>
       <%end%>
